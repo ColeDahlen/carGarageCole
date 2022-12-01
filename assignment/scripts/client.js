@@ -6,8 +6,8 @@ $(document).ready(readyNow);
 
 function readyNow() {
   console.log("DOM is loaded!");
+  render();
   $('#addCarButton').on('click', addNewCar)
-
   // add click event handler that calls the addNewCar function
 
 }
@@ -18,23 +18,27 @@ function addNewCar() {
   makeInput = $('#makeInput').val();
   modelInput = $('#modelInput').val();
   // add to array
-  garage = {
+  let newGarage = {
     year: Number(yearInput),
     make: makeInput,
     model: modelInput
   }
+  garage.push(newGarage);
   // anything else?
   render();
+  $('#yearInput').val('')
+  $('#makeInput').val('')
+  $('#modelInput').val('')
 }
 
 
 
 function render() {
   // update the DOM
-  $('.listOfCars').empty();
   for(let i = 0; i < garage.length; i++){
-    $('.listOfCars').append(`
-      <li>Car Year: ${garage[i].year}. Car Make: ${garage[i].make}. Car Model: ${garage[i].model}
+    $('#listOfCars').empty();
+    $('#listOfCars').append(`
+      <li>Car Year: ${garage[i].year}. Car Make: ${garage[i].make}. Car Model: ${garage[i].model}</li>
     `)
   }
 }
